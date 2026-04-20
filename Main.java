@@ -1,10 +1,18 @@
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        datatypes();
+        
+        //Uncomment the methods below to see the output for each topic
+        dataTypes();
         operators();
+        //assignmentOperators();
+        //decisionMaking();
+        //loops();
+        //howToUseScanner();
     }
-    public static void datatypes () {
+    public static void dataTypes () {
         /*
         * #Learning Java Fundaments
         * Variables in Java are fundamental containers that represent named memory 
@@ -213,7 +221,7 @@ public class Main {
     // Example of a switch statement
     System.out.println("\nSwitch Statement:");
     int day = 3;
-    
+
     switch (day) {
         case 1:
             System.out.println("Monday");
@@ -235,6 +243,40 @@ public class Main {
     
     }  
             
+    }
+
+    public static void howToUseScanner (){
+        Scanner myScanner = new Scanner(System.in);
+
+        System.out.println("Please enter your name:");
+        String name = myScanner.nextLine();
+        System.out.println("Hello, " + name + "!");
+
+        System.out.println("Please enter your age:");
+        int age = myScanner.nextInt();
+        System.out.println("You are " + age + " years old.");
+
+        //Example of using scanner with if statement
+        System.out.println("Please enter your favorite color:");
+        String color = myScanner.next();// we can also use nextLine() if we want to read the entire line of input, including spaces
+
+        if(color.equalsIgnoreCase("blue")) {
+            System.out.println("Blue is a great color!");
+        } else {
+            System.out.println(color + " is a nice color too!");
+        }
+
+        //Counter example of using scanner with a while loop
+        System.out.println("How many times do you want to see the message?");
+        int count = myScanner.nextInt();
+        int i = 0;
+
+        while (i < count) {
+            System.out.println("This is message number " + (i + 1));
+            i++;
+        }
+
+        myScanner.close();
     }
 }
 
