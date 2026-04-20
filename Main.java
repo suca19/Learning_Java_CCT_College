@@ -2,6 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
         datatypes();
+        operators();
     }
     public static void datatypes () {
         /*
@@ -37,7 +38,38 @@ public class Main {
         System.out.println("Colors: " + String.join(", ", colors)); // Output: Colors: Red, Green, Blue
     }
 
-    
+    public static void operators() {
+        /*
+        * #Learning Java Fundaments
+        * Operators in Java are special symbols or keywords that perform specific operations 
+        * on one or more operands (variables, values, or expressions) and produce a result. 
+        * Java provides a wide range of operators that can be categorized into several types, including:
+        * 1. Arithmetic Operators: Used for performing basic mathematical operations.
+        * 2. Relational Operators: Used for comparing two values.
+        * 3. Logical Operators: Used for combining multiple boolean expressions.
+        * 4. Assignment Operators: Used for assigning values to variables.
+        * 5. Bitwise Operators: Used for performing bit-level operations on integer types.
+        * 6. Ternary Operator: A shorthand for an if-else statement.
+        */
+
+        int myFirstNumber = 10;
+        int mySecondNumber = 5;
+        // Arithmetic Operators
+        int sum = myFirstNumber + mySecondNumber; // Addition
+        int difference = myFirstNumber - mySecondNumber; // Subtraction
+        int product = myFirstNumber * mySecondNumber; // Multiplication
+        int quotient = myFirstNumber / mySecondNumber; // Division
+        int remainder = myFirstNumber % mySecondNumber; // Modulus
+
+        System.out.println("Sum: " + sum); // Output: Sum: 15
+        System.out.println("Difference: " + difference); // Output: Difference: 5
+        System.out.println("Product: " + product); // Output: Product: 50
+        System.out.println("Quotient: " + quotient); // Output: Quotient: 2
+        System.out.println("Remainder: " + remainder); // Output: Remainder: 0
+
+
+    }
+
 
 
     
