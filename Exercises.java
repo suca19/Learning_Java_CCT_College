@@ -4,8 +4,8 @@ public class Exercises {
         
     
         //Q1();
-        //Q2();
-        Q3();
+        Q2();
+        //Q3();
         
     }
 
@@ -69,7 +69,7 @@ public class Exercises {
                     }
                 }
             }
-        }
+        } 
         if(!valid){
             System.out.println("error, try again");
         }
