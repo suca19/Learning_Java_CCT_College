@@ -1,3 +1,4 @@
+package exams;
 /*
 *name: Carlos Enrique Sucapuca Aracayo
 *studentID: 2026003
@@ -6,6 +7,7 @@
 
 import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +21,9 @@ public class Main {
         
         // Read the file and store valid salaries
         try{
-            Scanner myReader = new Scanner(new FileReader("./dataNumbers.txt"));
+            
+
+            Scanner myReader = new Scanner(new FileReader("dataNumbers.txt"));
             
             while (myReader.hasNextLine()) {
                 
@@ -44,7 +48,7 @@ public class Main {
             }
             myReader.close();
         } catch(FileNotFoundException e){
-            System.out.println("File not found");// In case a file is not found
+            System.out.println("File not found at: " + new File("dataNumbers.txt").getAbsolutePath());// In case a file is not found
 
         }
         
