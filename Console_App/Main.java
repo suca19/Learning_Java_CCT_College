@@ -95,7 +95,7 @@ public class Main {
             case 2:
                 queries.find_customers_who_rented_for_more_than_x_days(connectToDatabase, scanner);
                 break;
-            /*case 3:
+            case 3:
                 queries.list_all_services_for_a_given_booking(connectToDatabase, scanner);
                 break;
             case 4:
@@ -108,8 +108,8 @@ public class Main {
                 queries.calculate_total_revenue_for_a_specific_period(connectToDatabase, scanner);
                 break;
             case 7:
-                queries.update_return_date_of_car_for_specific_booking(connectToDatabase, scanner);
-                break;*/
+                queries.update_return_date_of_a_car_for_a_specific_booking(connectToDatabase, scanner);
+                break;
             default:
                 System.out.println("Exiting.");
         }
