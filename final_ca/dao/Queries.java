@@ -145,6 +145,8 @@ public class Queries {
             return bookings;
         } catch (SQLException e) {
             System.out.println("Error executing query: " + e.getMessage());
+            // If there's an error executing the query, we return the bookings list as it is, 
+            // which will be empty if the error occurred before adding any results.
             return bookings;
         }
     }
@@ -172,6 +174,8 @@ public class Queries {
             return rentals;
         } catch (SQLException e) {
             System.out.println("Error executing query: " + e.getMessage());
+            // If there's an error executing the query, we return the rentals list as it is, 
+            // which will be empty if the error occurred before adding any results.
             return rentals;
         }
     }
@@ -198,6 +202,8 @@ public class Queries {
             return services;
         } catch (SQLException e) {
             System.out.println("Error executing query: " + e.getMessage());
+            // If there's an error executing the query, we return the services list as it is, 
+            // which will be empty if the error occurred before adding any results.
             return services;
         }
     }
@@ -215,6 +221,7 @@ public class Queries {
             return statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error executing update: " + e.getMessage());
+            // If there's an error executing the update, we return 0 to indicate that no rows were updated.
             return 0;
         }
     }
@@ -242,6 +249,8 @@ public class Queries {
             return bookings;
         } catch (SQLException e) {
             System.out.println("Error executing query: " + e.getMessage());
+            // If there's an error executing the query, we return the bookings list as it is, 
+            // which will be empty if the error occurred before adding any results.
             return bookings;
         }
     }
@@ -281,6 +290,7 @@ public class Queries {
         } catch (SQLException e) {
             System.out.println("Error executing query: " + e.getMessage());
         }
+        // If the query fails or returns no rows, we return null to indicate that the total revenue could not be calculated.
         return null;
     }
 
