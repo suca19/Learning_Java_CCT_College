@@ -13,6 +13,7 @@ public class Pool {
         final String user = "root";
         final String password = "root123";
 
+        // Attempt to connect to the database and return the connection object.
         try {
             Connection connection = DriverManager.getConnection(url, user, password);
                 System.out.println("Connected to db");
@@ -20,6 +21,7 @@ public class Pool {
             } catch( SQLException e) {
             System.out.println("Connection failed " + e.getMessage());
         }
+        // If connection fails, we return null to signal the failure to the caller.
         return null;
     }
 
