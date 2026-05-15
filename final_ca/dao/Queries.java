@@ -19,6 +19,7 @@ public class Queries {
         private final Date dateOfBooking;
         private final Date returnDate;
 
+        // We build the BookingRow with all the fields returned by the query, and we provide getters for each field to allow access to the data.
         public BookingRow(int bookingId, String name, String carType, Date dateOfBooking, Date returnDate) {
             this.bookingId = bookingId;
             this.name = name;
@@ -27,10 +28,11 @@ public class Queries {
             this.returnDate = returnDate;
         }
 
+        // Getters for each field to allow access to the data in the BookingRow.
         public int getBookingId() {
             return bookingId;
         }
-
+        
         public String getName() {
             return name;
         }
@@ -54,12 +56,14 @@ public class Queries {
         private final String carType;
         private final int rentedDays;
 
+        // We build the RentedCustomerRow with all the fields returned by the query, and we provide getters for each field to allow access to the data.
         public RentedCustomerRow(String name, String carType, int rentedDays) {
             this.name = name;
             this.carType = carType;
             this.rentedDays = rentedDays;
         }
 
+        // Getters for each field to allow access to the data in the RentedCustomerRow.
         public String getName() {
             return name;
         }
@@ -78,6 +82,8 @@ public class Queries {
         private final Date dateOfService;
         private final String services;
 
+        // We build the ServiceBookingRow with all the fields returned by the query,
+        // and we provide getters for each field to allow access to the data.
         public ServiceBookingRow(Date dateOfService, String services) {
             this.dateOfService = dateOfService;
             this.services = services;
@@ -97,6 +103,8 @@ public class Queries {
         private final String name;
         private final int totalBookings;
 
+        // We build the CustomerBookingCountRow with all the fields returned by the query, 
+        // and we provide getters for each field to allow access to the data.
         public CustomerBookingCountRow(String name, int totalBookings) {
             this.name = name;
             this.totalBookings = totalBookings;
@@ -119,10 +127,13 @@ public class Queries {
                 "where cu.Name like ?";
         List<BookingRow> bookings = new ArrayList<>();
 
+        // We use a prepared statement to safely inject the customer name parameter into the query, 
+        // and we execute the query to retrieve the results. 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, customerName);
             ResultSet resultSet = statement.executeQuery();
-
+            
+            // We loop through the ResultSet and build a list of BookingRow objects to return to the caller.
             while (resultSet.next()) {
                 bookings.add(new BookingRow(
                         resultSet.getInt("Booking_ID"),
@@ -145,10 +156,13 @@ public class Queries {
                 "where datediff(co.Return_Date, co.Date_Of_Booking) > ? order by Rented_Days asc";
         List<RentedCustomerRow> rentals = new ArrayList<>();
 
+        // We use a prepared statement to safely inject the daysRented parameter into the query,
+        // and we execute the query to retrieve the results.
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, daysRented);
             ResultSet resultSet = statement.executeQuery();
 
+            // We loop through the ResultSet and build a list of RentedCustomerRow objects to return to the caller.
             while (resultSet.next()) {
                 rentals.add(new RentedCustomerRow(
                         resultSet.getString("Name"),
@@ -169,10 +183,13 @@ public class Queries {
                 "group by co.Date_Of_Booking;";
         List<ServiceBookingRow> services = new ArrayList<>();
 
+        // We use a prepared statement to safely inject the bookingID parameter into the query, 
+        // and we execute the query to retrieve the results.
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, bookingID);
             ResultSet resultSet = statement.executeQuery();
 
+            // We loop through the ResultSet and build a list of ServiceBookingRow objects to return to the caller.
             while (resultSet.next()) {
                 services.add(new ServiceBookingRow(
                         resultSet.getDate("Date_Of_Service"),
@@ -189,6 +206,9 @@ public class Queries {
     public static int updateCustomerInformation(Connection connection, String oldName, String newName) {
         String query = "update customers set Name = ? where Name = ?";
 
+        // We use a prepared statement to safely inject the newName and oldName parameters into the query,
+        // and we execute the update to change the customer's name. 
+        // We return the number of rows affected by the update to indicate success or failure to the caller.
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, newName);
             statement.setString(2, oldName);
@@ -206,11 +226,14 @@ public class Queries {
                 "group by cu.Name order by Total_Bookings desc;";
         List<CustomerBookingCountRow> bookings = new ArrayList<>();
 
+        // We use a prepared statement to safely inject the firstYear and secondYear parameters into the query,
+        // and we execute the query to retrieve the results.
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, firstYear);
             statement.setInt(2, secondYear);
             ResultSet resultSet = statement.executeQuery();
 
+            // We loop through the ResultSet and build a list of CustomerBookingCountRow objects to return to the caller.
             while (resultSet.next()) {
                 bookings.add(new CustomerBookingCountRow(
                         resultSet.getString("Name"),
@@ -240,11 +263,14 @@ public class Queries {
                 "where co.Date_Of_Booking between ? and ?" +
                 ") as booking_costs;";
 
+        // We use a prepared statement to safely inject the startDate and endDate parameters into the query,
+        // and we execute the query to retrieve the total revenue.
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, startDate);
             statement.setString(2, endDate);
             ResultSet resultSet = statement.executeQuery();
 
+            // We check if the ResultSet has a row (it should have one row with the total revenue), and we retrieve the total revenue value.
             if (resultSet.next()) {
                 double totalRevenue = resultSet.getDouble("Total_Revenue");
                 if (resultSet.wasNull()) {
@@ -262,6 +288,9 @@ public class Queries {
     public static int updateReturnDateOfACarForASpecificBooking(Connection connection, int bookingID, String newReturnDate) {
         String query = "update car_orders set Return_Date = ? where Booking_ID = ?";
 
+        // We use a prepared statement to safely inject the newReturnDate and bookingID parameters into the query,
+        // and we execute the update to change the return date for the specified booking.
+        // We return the number of rows affected by the update to indicate success or failure to the caller.
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, newReturnDate);
             statement.setInt(2, bookingID);
